@@ -1,14 +1,16 @@
+import { User } from 'firebase/auth';
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
 
 type Props = {
+  user: User | undefined | null;
   children?: ReactNode;
 };
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ user, children }: Props) => {
   return (
     <div className='min-h-full'>
-      <Navbar />
+      <Navbar user={user} />
       <main className='mt-8 pb-8'>{children}</main>
       <footer>
         <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
