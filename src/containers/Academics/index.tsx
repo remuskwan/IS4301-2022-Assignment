@@ -1,5 +1,8 @@
+import { useAuthState } from 'react-firebase-hooks/auth';
 import Table from '../../components/academics/Table';
 import Layout from '../../components/layout/Layout';
+import { auth } from '../../utils/firebase';
+
 const modules = [
   { code: 'BT1101', title: 'Introduction to Business Analytics' },
   { code: 'BT2101', title: 'Econometrics Modelling for Business Analytics' },
@@ -8,8 +11,10 @@ const modules = [
 ];
 
 const Academics = () => {
+  const [user, loading, error] = useAuthState(auth);
+
   return (
-    <Layout>
+    <Layout user={user}>
       <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
         <h1 className='sr-only'>Academics</h1>
         <div className='container mx-auto sm:px-6 lg:px-8'>
