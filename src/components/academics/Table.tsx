@@ -14,7 +14,7 @@ const Table = ({ data = [] }: Props) => {
     <div className='mt-8 flex flex-col'>
       <div className='-my-2 -mx-4 sm:-mx-6 lg:-mx-8'>
         <div className='inline-block min-w-full py-2 align-middle'>
-          <div className='shadow-sm ring-1 ring-black ring-opacity-5'>
+          <div className='overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5'>
             <table className='min-w-full border-separate' style={{ borderSpacing: 0 }}>
               <thead className='bg-gray-50'>
                 <tr>
@@ -46,7 +46,7 @@ const Table = ({ data = [] }: Props) => {
                     <td
                       className={classNames(
                         moduleIdx !== data.length - 1 ? 'border-b border-gray-200' : '',
-                        'whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden sm:table-cell',
+                        'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
                       )}
                     >
                       {module.title}

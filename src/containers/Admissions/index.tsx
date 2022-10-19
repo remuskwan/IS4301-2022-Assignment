@@ -1,4 +1,6 @@
+import { useAuthState } from 'react-firebase-hooks/auth';
 import Layout from '../../components/layout/Layout';
+import { auth } from '../../utils/firebase';
 
 const timeline = [
   'Understanding Admission requirements',
@@ -9,8 +11,10 @@ const timeline = [
 ];
 
 const Admission = () => {
+  const [user, loading, error] = useAuthState(auth);
+
   return (
-    <Layout>
+    <Layout user={user}>
       <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
         <h1 className='sr-only'>Admission</h1>
         <div className='container mx-auto sm:px-6 lg:px-8'>

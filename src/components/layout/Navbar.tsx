@@ -1,9 +1,17 @@
-import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, UserCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import { User } from 'firebase/auth';
 
 import { classNames } from '../../utils/classNames';
 import logo from '../../assets/nus-logo.jpeg';
+import { logout, signInWithGoogle } from '../../utils/firebase';
+import google from '../../assets/google.svg';
+
+type Props = {
+  user: User | undefined | null;
+};
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -11,7 +19,12 @@ const navigation = [
   { name: 'Admission', href: '/admission', current: false },
 ];
 
-const Navbar = () => {
+const userNavigation = [
+  { name: 'Your Profile', href: '#' },
+  { name: 'Settings', href: '#' },
+];
+
+const Navbar = ({ user = null }: Props) => {
   return (
     <Disclosure as='nav' className='bg-white shadow'>
       {({ open }) => (
@@ -40,6 +53,52 @@ const Navbar = () => {
                     </Link>
                   ))}
                 </div>
+              </div>
+              <div className='hidden lg:ml-4 lg:flex lg:items-center lg:pr-0.5'>
+                {/* Profile dropdown */}
+                <Menu as='div' className='relative ml-4 flex-shrink-0'>
+                  <div>
+                    <Menu.Button className='flex rounded-full bg-white text-sm ring-2 ring-white ring-opacity-20 focus:outline-none focus:ring-opacity-100'>
+                      <span className='sr-only'>Open user menu</span>
+                      {user?.photoURL ? (
+                        <img className='h-8 w-8 rounded-full' src={user.photoURL} alt='' />
+                      ) : (
+                        <UserCircleIcon className='h-8 w-8 text-gray-500' />
+                      )}
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    leave='transition ease-in duration-75'
+                    leaveFrom='transform opacity-100 scale-100'
+                    leaveTo='transform opacity-0 scale-95'
+                  >
+                    <Menu.Items className='absolute -right-2 z-10 mt-2 w-52 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                      {!user ? (
+                        <Menu.Item key='sign-in-google'>
+                          <button
+                            onClick={signInWithGoogle}
+                            className='m-2 bg-white flex items-center justify-center space-x-2 px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500'
+                          >
+                            <img src={google} className='mx-auto h-5 w-5' alt='google-logo' />
+                            <span>Sign in with Google</span>
+                          </button>
+                        </Menu.Item>
+                      ) : (
+                        <Menu.Item key='sign-out'>
+                          {({ active }) => (
+                            <button
+                              onClick={logout}
+                              className={classNames(active ? 'bg-gray-100' : '', 'w-full block px-4 py-2 text-sm text-left text-gray-700')}
+                            >
+                              Sign out
+                            </button>
+                          )}
+                        </Menu.Item>
+                      )}
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
               </div>
               <div className='-mr-2 flex items-center sm:hidden'>
                 {/* Mobile menu button */}
