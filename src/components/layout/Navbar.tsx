@@ -6,8 +6,9 @@ import { User } from 'firebase/auth';
 
 import { classNames } from '../../utils/classNames';
 import logo from '../../assets/nus-logo.jpeg';
-import { logout, signInWithGoogle } from '../../utils/firebase';
-import google from '../../assets/google.svg';
+import SignInWithGoogleButton from './SignInWithGoogleButton';
+import SignOutButton from './SignOutButton';
+import { logout } from '../../utils/firebase';
 
 type Props = {
   user: User | undefined | null;
@@ -17,11 +18,6 @@ const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Academics', href: '/academics', current: false },
   { name: 'Admission', href: '/admission', current: false },
-];
-
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
 ];
 
 const Navbar = ({ user = null }: Props) => {
@@ -41,6 +37,7 @@ const Navbar = ({ user = null }: Props) => {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   {navigation.map(item => (
                     <Link
+                      key={item.name}
                       to={item.href}
                       className={classNames(
                         item.current
@@ -76,25 +73,10 @@ const Navbar = ({ user = null }: Props) => {
                     <Menu.Items className='absolute -right-2 z-10 mt-2 w-52 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                       {!user ? (
                         <Menu.Item key='sign-in-google'>
-                          <button
-                            onClick={signInWithGoogle}
-                            className='m-2 bg-white flex items-center justify-center space-x-2 px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500'
-                          >
-                            <img src={google} className='mx-auto h-5 w-5' alt='google-logo' />
-                            <span>Sign in with Google</span>
-                          </button>
+                          <SignInWithGoogleButton />
                         </Menu.Item>
                       ) : (
-                        <Menu.Item key='sign-out'>
-                          {({ active }) => (
-                            <button
-                              onClick={logout}
-                              className={classNames(active ? 'bg-gray-100' : '', 'w-full block px-4 py-2 text-sm text-left text-gray-700')}
-                            >
-                              Sign out
-                            </button>
-                          )}
-                        </Menu.Item>
+                        <Menu.Item key='sign-out'>{({ active }) => <SignOutButton active={active} />}</Menu.Item>
                       )}
                     </Menu.Items>
                   </Transition>
@@ -116,20 +98,45 @@ const Navbar = ({ user = null }: Props) => {
 
           <Disclosure.Panel className='sm:hidden'>
             <div className='space-y-1 pt-2 pb-3'>
-              {navigation.map(item => (
-                <Disclosure.Button
-                  as={Link}
-                  to={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-indigo-50 border-indigo-500 text-indigo-700'
-                      : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700',
-                    'block border-l-4 py-2 pl-3 pr-4 text-base font-medium',
-                  )}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+              <>
+                {navigation.map(item => (
+                  <Disclosure.Button
+                    as={Link}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? 'bg-indigo-50 border-indigo-500 text-indigo-700'
+                        : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700',
+                      'block border-l-4 py-2 pl-3 pr-4 text-base font-medium',
+                    )}
+                  >
+                    {item.name}
+                  </Disclosure.Button>
+                ))}
+                {!user ? (
+                  <div className='flex justify-center'>
+                    <SignInWithGoogleButton />
+                  </div>
+                ) : (
+                  <div>
+                    <div className='flex items-center px-5'>
+                      <div className='flex-shrink-0'>
+                        {user?.photoURL && <img className='h-8 w-8 rounded-full' src={user.photoURL} alt='' />}
+                      </div>
+                      <div className='ml-3 min-w-0 flex-1'>
+                        <div className='truncate text-base font-medium text-gray-800'>{user.displayName}</div>
+                        <div className='truncate text-sm font-medium text-gray-500'>{user.email}</div>
+                      </div>
+                    </div>
+                    <Disclosure.Button
+                      onClick={logout}
+                      className='block border-l-4 py-2 pl-3 pr-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+                    >
+                      Sign out
+                    </Disclosure.Button>
+                  </div>
+                )}
+              </>
             </div>
           </Disclosure.Panel>
         </>
