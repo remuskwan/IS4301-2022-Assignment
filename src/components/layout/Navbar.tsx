@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { User } from 'firebase/auth';
 
 import { classNames } from '../../utils/classNames';
-import logo from '../../assets/nus-logo.jpeg';
+import logo from '../../assets/nus-logo.svg';
 import SignInWithGoogleButton from './SignInWithGoogleButton';
 import SignOutButton from './SignOutButton';
 import { logout } from '../../utils/firebase';
@@ -29,9 +29,7 @@ const Navbar = ({ user = null }: Props) => {
             <div className='flex h-16 justify-between'>
               <div className='flex'>
                 <div className='flex flex-shrink-0 items-center'>
-                  {/* TODO: Change to vector and scale accordingly */}
-                  <img className='block h-8 w-auto lg:hidden' src={logo} alt='nus-logo' />
-                  <img className='hidden h-8 w-auto lg:block' src={logo} alt='nus-logo' />
+                  <img className='h-6 w-auto' src={logo} alt='nus-logo' />
                 </div>
                 <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
