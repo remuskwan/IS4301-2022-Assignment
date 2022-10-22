@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import utownGreen from '../../assets/utown-green.jpeg'; 
+import logo from '../../assets/nus-logo-white.svg';
+import utownGreen from '../../assets/utown-green.jpeg';
 // import NusCoat from '../vectors/NusCoat';
 
 const Hero = () => {
@@ -18,10 +19,13 @@ const Hero = () => {
                 <NusCoat />
               </div>
             </div> */}
-            <h1 className='text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
-              <span className='block text-white'>National University</span>
-              <span className='block text-indigo-200'>of Singapore</span>
-            </h1>
+            <div className='flex flex-col'>
+              <img src={logo} className='block h-44 w-auto' alt='nus-logo'/>
+              {/* <h1 className='text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
+                <span className='block text-white'>National University</span>
+                <span className='block text-indigo-200'>of Singapore</span>
+              </h1> */}
+            </div>
             <p className='mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl'>
               NUS is a leading research university in Asia.
             </p>
