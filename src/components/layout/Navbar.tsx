@@ -130,7 +130,7 @@ const Navbar = ({ user = null }: Props) => {
                     </div>
                     <Disclosure.Button
                       onClick={logout}
-                      className='block border-l-4 py-2 pl-3 pr-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+                      className='block w-full border-l-4 py-2 pl-3 pr-4 text-left text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
                     >
                       Sign out
                     </Disclosure.Button>
