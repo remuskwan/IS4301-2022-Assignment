@@ -14,17 +14,8 @@ const Hero = () => {
             <div className='absolute inset-0 bg-indigo-700 mix-blend-multiply' />
           </div>
           <div className='relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8'>
-            {/* <div className='relative flex justify-center items-center'>
-              <div className='absolute inset-x-0 block h-26 w-auto'>
-                <NusCoat />
-              </div>
-            </div> */}
             <div className='flex flex-col'>
               <img src={logo} className='block h-44 w-auto' alt='nus-logo'/>
-              {/* <h1 className='text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
-                <span className='block text-white'>National University</span>
-                <span className='block text-indigo-200'>of Singapore</span>
-              </h1> */}
             </div>
             <p className='mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl'>
               NUS is a leading research university in Asia.
