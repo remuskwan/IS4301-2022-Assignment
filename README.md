@@ -1,6 +1,6 @@
 # IS4301 Assignment 2022
 
-Live website: [https://is4301-assignment-remus.vercel.app/]
+Live website: https://is4301-assignment-remus.vercel.app/
 
 ## Available Scripts
 
