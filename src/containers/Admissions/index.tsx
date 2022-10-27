@@ -23,8 +23,10 @@ const Admission = () => {
               <h1 className='text-xl font-semibold text-gray-900'>Admission</h1>
             </div>
           </div>
-          <span className={'text-gray-900 first-line:text-sm font-medium'}>Timeline</span>
-          <div className='prose prose-lg text-gray-500 pb-6'>
+          <div className='mt-3'>
+            <h2 className='text-gray-900 text-lg font-medium'>Timeline</h2>
+          </div>
+          <div className='prose prose-md text-gray-500 pb-6'>
             <ol>
               {timeline.map(item => (
                 <li key={item}>{item}</li>
