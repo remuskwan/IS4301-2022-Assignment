@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/nus-logo-white.svg';
 import utownGreen from '../../assets/utown-green.jpeg';
-// import NusCoat from '../vectors/NusCoat';
 
 const Hero = () => {
   return (
