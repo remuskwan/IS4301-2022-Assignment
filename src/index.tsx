@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Academics from './containers/Academics';
 import Admission from './containers/Admissions';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import ForgotPassword from './containers/ForgotPassword';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -13,6 +16,17 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  },{
+    path: '/forgot-password',
+    element: <ForgotPassword />,
   },
   {
     path: '/academics',

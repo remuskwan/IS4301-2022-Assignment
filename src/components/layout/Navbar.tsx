@@ -74,9 +74,47 @@ const Navbar = ({ user = null }: Props) => {
                   >
                     <Menu.Items className='absolute -right-2 z-10 mt-2 w-52 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                       {!user ? (
-                        <Menu.Item key='sign-in-google'>
-                          <SignInWithGoogleButton />
-                        </Menu.Item>
+                        <>
+                          <Menu.Item key='sign-out'>
+                            {({ active }) => (
+                              <Link
+                                to='/login'
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'w-full block px-4 py-2 text-sm text-left text-gray-700',
+                                )}
+                              >
+                                Sign in
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item key='sign-out'>
+                            {({ active }) => (
+                              <Link
+                                to='/register'
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'w-full block px-4 py-2 text-sm text-left text-gray-700',
+                                )}
+                              >
+                                Register
+                              </Link>
+                            )}
+                          </Menu.Item>
+
+                          <div className='relative'>
+                            <div className='absolute inset-0 flex items-center'>
+                              <div className='w-full border-t border-gray-300' />
+                            </div>
+                            <div className='relative flex justify-center text-sm'>
+                              <span className='bg-white px-2 text-gray-500'>or</span>
+                            </div>
+                          </div>
+
+                          <Menu.Item key='sign-in-google'>
+                            <SignInWithGoogleButton />
+                          </Menu.Item>
+                        </>
                       ) : (
                         <Menu.Item key='sign-out'>{({ active }) => <SignOutButton active={active} />}</Menu.Item>
                       )}
@@ -116,8 +154,18 @@ const Navbar = ({ user = null }: Props) => {
                   </Disclosure.Button>
                 ))}
                 {!user ? (
-                  <div className='flex justify-center'>
-                    <SignInWithGoogleButton />
+                  <div>
+                    <div className='relative'>
+                      <div className='absolute inset-0 flex items-center'>
+                        <div className='w-full border-t border-gray-300' />
+                      </div>
+                      <div className='relative flex justify-center text-sm'>
+                        <span className='bg-white px-2 text-gray-500'>Or continue with</span>
+                      </div>
+                    </div>
+                    <div className='flex justify-center'>
+                      <SignInWithGoogleButton />
+                    </div>
                   </div>
                 ) : (
                   <div>
